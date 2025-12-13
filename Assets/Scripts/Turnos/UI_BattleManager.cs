@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Timeline : MonoBehaviour
+public class UI_BattleManager : MonoBehaviour
 {
-    public static UI_Timeline Instance;
+    public GameObject menuAcciones;
+
+    public static UI_BattleManager Instance;
 
     public List<TimelineRombo> rombos;
     public Sprite interrogationIcon;
@@ -25,5 +27,15 @@ public class UI_Timeline : MonoBehaviour
                 rombos[i].icon.enabled = true;
             }
         }
+    }
+
+    public void ShowActions()
+    {
+        menuAcciones.SetActive(true);
+    }
+
+    public void OnDefend()
+    {
+        TurnManager.Instance.ExecuteAction(new DefendAction());
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +12,8 @@ public class TurnManager : MonoBehaviour
 
     private List<BaseEntity> allEntities;
 
+    public BaseEntity current;
+
     void Awake()
     {
         Instance = this;
@@ -21,8 +22,8 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         InitializeInitiative();
-        GenerateTurnOrder();
-        StartCoroutine(TurnLoop());
+        GenerateTurnOrder(new List<BaseEntity>());
+        NextTurn();
     }
 
     void InitializeInitiative()
@@ -39,15 +40,13 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    void GenerateTurnOrder()
+    void GenerateTurnOrder(List<BaseEntity> order)
     {
         allEntities = new List<BaseEntity>(FindObjectsByType<BaseEntity>(FindObjectsSortMode.None));
 
         var aliveInCombat = allEntities
             .Where(e => e.inCombat && e.GetStat(StatsEnum.Health) > 0)
             .ToList();
-
-        List<BaseEntity> order = new List<BaseEntity>();
 
         for (int i = 0; i < TurnConstants.TurnsGenerated; i++)
         {
@@ -69,30 +68,37 @@ public class TurnManager : MonoBehaviour
         UpdateTimeline();
     }
 
-    IEnumerator TurnLoop()
+    void NextTurn()
     {
-        while (true)
-        {
-            BaseEntity current = GetNextEntity();
+        current = GetNextEntity();
 
-            yield return BattleSystem.Instance.ExecuteTurn(current);
+        UI_BattleManager.Instance.ShowActions();
 
-            UpdateTimeline();
-            yield return new WaitForSeconds(0.25f);
-        }
+        UpdateTimeline();
     }
 
     BaseEntity GetNextEntity()
     {
-        if (turnQueue.Count == 0)
-            GenerateTurnOrder();
+        if (turnQueue.Count < 7)
+            GenerateTurnOrder(turnQueue.ToList());
 
         return turnQueue.Dequeue();
     }
 
+    public void ExecuteAction(IBattleAction action)
+    {
+        bool consumesTurn = action.Execute(current);
+        if (!consumesTurn)
+        {
+            return;
+        }
+
+        NextTurn();
+    }
+
     void UpdateTimeline()
     {
-        UI_Timeline.Instance.UpdateTimeline(turnQueue.Take(TurnConstants.TurnsViewed).ToList());
+        UI_BattleManager.Instance.UpdateTimeline(turnQueue.Take(TurnConstants.TurnsViewed).ToList());
 
     }
 }
