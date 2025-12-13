@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75c9bb57d7090c40b2059daa48f903d, type: 3}
+  m_Name: Luz
+  m_EditorClassIdentifier: 
+  conversationLines:
+  - speakerName: Elely
+    dialogueLine: 'Que luz mas intensa...
+
+      sera mejor que no la mire mucho'
+    eventType: 0
+    optionalParameter: 
