@@ -68,7 +68,7 @@ public class TurnManager : MonoBehaviour
         UpdateTimeline();
     }
 
-    void NextTurn()
+    public void NextTurn()
     {
         current = GetNextEntity();
 
@@ -85,7 +85,7 @@ public class TurnManager : MonoBehaviour
         return turnQueue.Dequeue();
     }
 
-    public void ExecuteAction(IBattleAction action)
+    public void ExecuteAction(BattleAction action)
     {
         bool consumesTurn = action.Execute(current);
         if (!consumesTurn)
@@ -99,6 +99,5 @@ public class TurnManager : MonoBehaviour
     void UpdateTimeline()
     {
         UI_BattleManager.Instance.UpdateTimeline(turnQueue.Take(TurnConstants.TurnsViewed).ToList());
-
     }
 }

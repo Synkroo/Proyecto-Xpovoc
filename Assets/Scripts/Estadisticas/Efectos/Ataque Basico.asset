@@ -15,4 +15,4 @@ MonoBehaviour:
   statsToIncrease: []
   statsToDecrease:
   - stat: 0
-    amount: 20
+    value: 20

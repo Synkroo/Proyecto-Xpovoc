@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DescripcionItem : MonoBehaviour
 {
-    public TextMeshProUGUI tmpHijo; // El tooltip
+    public TextMeshProUGUI tmpHijo;
     private RectTransform rect;
 
     void Start()
@@ -20,7 +20,6 @@ public class DescripcionItem : MonoBehaviour
 
         Vector2 mousePos = Input.mousePosition;
 
-        // Comprueba si el mouse está sobre el rectángulo del Button
         if (RectTransformUtility.RectangleContainsScreenPoint(rect, mousePos, null))
         {
             tmpHijo.gameObject.SetActive(true);

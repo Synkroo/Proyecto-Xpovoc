@@ -5,7 +5,7 @@ public enum DialogueEventType
 {
     None,
     ChangeScene,
-    // Más eventos en el futuro: GiveReward, StartCombat, etc.
+    GiveItems,
 }
 
 [System.Serializable]
@@ -16,8 +16,14 @@ public struct Line
     public string dialogueLine;
 
     public DialogueEventType eventType;
-    public string optionalParameter;  // Parámetro opcional (ej. nombre de escena)
+
+    // Por ejemplo: nombres de escenas o ids de recompensas: "Casa_Cofre", "Casa_NPC1", "Mapa_Anciano_Recompensa"
+    public string optionalParameter;
+
+    public List<DialogueItemReward> itemsToGive;
 }
+
+
 
 [CreateAssetMenu(fileName = "NewConversation", menuName = "Dialogue/Conversation")]
 public class ConversationTemplate : ScriptableObject

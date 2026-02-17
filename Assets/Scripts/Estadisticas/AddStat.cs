@@ -2,29 +2,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New AddStat", menuName = "Effects/AddStat")]
-public class AddStat : ScriptableObject
+public class AddStat : IEffect
 {
     [Header("Stats a aumentar")]
-    public List<StatChange> statsToIncrease = new List<StatChange>();
-    [Header("Stats a reducir")]
-    public List<StatChange> statsToDecrease = new List<StatChange>();
+    public List<StatValue> statsToIncrease = new();
 
-    public void Apply(BaseEntity target)
+    [Header("Stats a reducir")]
+    public List<StatValue> statsToDecrease = new();
+
+    public override void Apply(BaseEntity target)
     {
         if (target == null) return;
 
-        // Aplicar aumentos
         foreach (var change in statsToIncrease)
         {
             if (target.HasStat(change.stat))
-                target.AddStat(change.stat, change.amount);
+                target.AddStat(change.stat, change.value);
         }
 
-        // Aplicar reducciones
         foreach (var change in statsToDecrease)
         {
             if (target.HasStat(change.stat))
-                target.AddStat(change.stat, -change.amount); // negativo
+                target.AddStat(change.stat, -change.value);
         }
     }
 }

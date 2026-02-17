@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEntity : MonoBehaviour
+public class BaseEntity : MonoBehaviour, ITargetable
 {
     public bool inCombat = true;
     public Sprite turnIcon;
 
-    // Booleanos de tipo
     public bool isAlly;
     public bool isEnemy;
     public bool isHelper;
+
+    private SpriteRenderer sr;
 
     public Dictionary<StatsEnum, float> stats = new Dictionary<StatsEnum, float>();
     public string entityName = "Enemy";
@@ -25,5 +26,24 @@ public class BaseEntity : MonoBehaviour
     {
         if (!HasStat(stat)) return;
         stats[stat] = value;
+    }
+    void Awake()
+    {
+        sr = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    public void OnHoverEnter()
+    {
+        sr.color = Color.red;
+    }
+
+    public void OnHoverExit()
+    {
+        sr.color = Color.white;
+    }
+
+    public void OnSelected()
+    {
+        sr.color = Color.white;
     }
 }

@@ -10,9 +10,6 @@ public class ButtonApplyEffect : MonoBehaviour
 
     public void OnClick()
     {
-        if (effect != null && target != null)
-        {
-            effect.Apply(target);
-        }
+
     }
 }

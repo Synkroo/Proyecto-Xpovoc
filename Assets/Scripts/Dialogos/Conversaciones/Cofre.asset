@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75c9bb57d7090c40b2059daa48f903d, type: 3}
+  m_Name: Cofre
+  m_EditorClassIdentifier: 
+  conversationLines:
+  - speakerName: Elely
+    dialogueLine: Ojoo, un cofree
+    eventType: 0
+    optionalParameter: 
+    itemsToGive: []
+  - speakerName: Cofre
+    dialogueLine: Has obtenido una pocion de mana!
+    eventType: 2
+    optionalParameter: ID02
+    itemsToGive:
+    - item: {fileID: 11400000, guid: 23cd4378e7b585b49bf2f16a5fbf5e44, type: 2}
+      amount: 1

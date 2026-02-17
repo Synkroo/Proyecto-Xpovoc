@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class InitDialogueDistance : MonoBehaviour
 {
-    public ConversationTemplate conversation;
+    [Header("CONVERSACIONES")]
+    public List<ConversationTemplate> conversations;
+
+    private int currentConversationIndex = 0;
 
     [Header("UI DEL NPC")]
     public GameObject panelNombre;
@@ -12,6 +16,28 @@ public class InitDialogueDistance : MonoBehaviour
     public TextMeshProUGUI dialogo;
 
     private bool playerNear = false;
+
+    private void Awake()
+    {
+        if (conversations == null || conversations.Count == 0)
+        {
+            Debug.LogWarning($"InitDialogueDistance en {gameObject.name} sin conversaciones");
+        }
+    }
+
+    public ConversationTemplate GetCurrentConversation()
+    {
+        if (currentConversationIndex >= conversations.Count)
+            return conversations[conversations.Count - 1];
+
+        return conversations[currentConversationIndex];
+    }
+
+    public void AdvanceConversation()
+    {
+        if (currentConversationIndex < conversations.Count - 1)
+            currentConversationIndex++;
+    }
 
     void Update()
     {
