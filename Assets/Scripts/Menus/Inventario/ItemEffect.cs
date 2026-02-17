@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Inventory/Item Effect")]
 public class ItemEffect : ScriptableObject
 {
+
     public List<StatModifier> modifiers;
 
     [Header("Uso en combate")]

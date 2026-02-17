@@ -5449,8 +5449,8 @@ GameObject:
   - component: {fileID: 798834041}
   - component: {fileID: 798834040}
   - component: {fileID: 798834039}
-  - component: {fileID: 798834043}
   - component: {fileID: 798834042}
+  - component: {fileID: 798834043}
   m_Layer: 5
   m_Name: Button_Items
   m_TagString: Untagged
@@ -8994,7 +8994,6 @@ GameObject:
   - component: {fileID: 1294621356}
   - component: {fileID: 1294621355}
   - component: {fileID: 1294621354}
-  - component: {fileID: 1294621353}
   m_Layer: 5
   m_Name: Nombre (1)
   m_TagString: Untagged
@@ -9023,19 +9022,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.1518, y: 17.8}
   m_SizeDelta: {x: 319.3036, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1294621353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294621351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da24fa337b7857428b5b7ccc622cc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpHijo: {fileID: 551997630}
 --- !u!114 &1294621354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9798,7 +9784,6 @@ GameObject:
   - component: {fileID: 1374889213}
   - component: {fileID: 1374889212}
   - component: {fileID: 1374889211}
-  - component: {fileID: 1374889210}
   m_Layer: 5
   m_Name: Crono 3
   m_TagString: Untagged
@@ -9827,19 +9812,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.5587, y: -54}
   m_SizeDelta: {x: 316.7173, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1374889210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374889208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da24fa337b7857428b5b7ccc622cc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpHijo: {fileID: 1270026731}
 --- !u!114 &1374889211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10620,7 +10592,6 @@ GameObject:
   - component: {fileID: 1426395398}
   - component: {fileID: 1426395397}
   - component: {fileID: 1426395396}
-  - component: {fileID: 1426395395}
   m_Layer: 5
   m_Name: Nombre
   m_TagString: Untagged
@@ -10649,19 +10620,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.1518, y: 86.6}
   m_SizeDelta: {x: 319.3036, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1426395395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426395393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da24fa337b7857428b5b7ccc622cc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpHijo: {fileID: 1899658472}
 --- !u!114 &1426395396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11329,7 +11287,6 @@ GameObject:
   - component: {fileID: 1514451302}
   - component: {fileID: 1514451301}
   - component: {fileID: 1514451300}
-  - component: {fileID: 1514451299}
   m_Layer: 5
   m_Name: Crono 2
   m_TagString: Untagged
@@ -11358,19 +11315,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.5587, y: 16.9}
   m_SizeDelta: {x: 316.7173, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1514451299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514451297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da24fa337b7857428b5b7ccc622cc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpHijo: {fileID: 2098570933}
 --- !u!114 &1514451300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12782,7 +12726,6 @@ GameObject:
   - component: {fileID: 1732066625}
   - component: {fileID: 1732066624}
   - component: {fileID: 1732066623}
-  - component: {fileID: 1732066622}
   m_Layer: 5
   m_Name: Nombre (2)
   m_TagString: Untagged
@@ -12811,19 +12754,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.1518, y: -53.8}
   m_SizeDelta: {x: 319.3036, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1732066622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732066620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da24fa337b7857428b5b7ccc622cc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpHijo: {fileID: 1515730960}
 --- !u!114 &1732066623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13960,7 +13890,6 @@ GameObject:
   - component: {fileID: 1881455338}
   - component: {fileID: 1881455337}
   - component: {fileID: 1881455336}
-  - component: {fileID: 1881455339}
   m_Layer: 5
   m_Name: Crono 1
   m_TagString: Untagged
@@ -14071,19 +14000,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881455334}
   m_CullTransparentMesh: 1
---- !u!114 &1881455339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881455334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da24fa337b7857428b5b7ccc622cc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tmpHijo: {fileID: 539968672}
 --- !u!1 &1890972336
 GameObject:
   m_ObjectHideFlags: 0
