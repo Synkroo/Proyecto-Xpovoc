@@ -20,9 +20,7 @@ public class InitDialogueDistance : MonoBehaviour
     private void Awake()
     {
         if (conversations == null || conversations.Count == 0)
-        {
             Debug.LogWarning($"InitDialogueDistance en {gameObject.name} sin conversaciones");
-        }
     }
 
     public ConversationTemplate GetCurrentConversation()
@@ -39,12 +37,17 @@ public class InitDialogueDistance : MonoBehaviour
             currentConversationIndex++;
     }
 
-    void Update()
+    public int GetConversationIndex() => currentConversationIndex;
+
+    public void SetConversationIndex(int index)
+    {
+        currentConversationIndex = Mathf.Clamp(index, 0, conversations.Count - 1);
+    }
+
+    private void Update()
     {
         if (playerNear && Input.GetKeyDown(KeyCode.E))
-        {
             DialogueManager.Instance.StartDialogue(this);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

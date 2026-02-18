@@ -12,8 +12,13 @@ public class DialogueManager : MonoBehaviour
     public bool IsDialogueActive => dialogueActive;
     private Line currentLine;
     private List<Line> pendingEvents = new List<Line>();
-
     public PlayerController playerController;
+
+    private HashSet<string> readConversations = new HashSet<string>();
+
+    private Dictionary<string, int> npcConversationIndices = new Dictionary<string, int>();
+
+    private HashSet<string> destroyedObjects = new HashSet<string>();
 
     private void Awake()
     {
@@ -22,25 +27,24 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (playerController == null)
             playerController = FindFirstObjectByType<PlayerController>();
+
+        foreach (var destroyedName in destroyedObjects)
+        {
+            var obj = GameObject.Find(destroyedName);
+            if (obj != null)
+                obj.SetActive(false);
+        }
     }
 
     private void Start()
@@ -49,7 +53,7 @@ public class DialogueManager : MonoBehaviour
             playerController = FindFirstObjectByType<PlayerController>();
     }
 
-    void Update()
+    private void Update()
     {
         if (dialogueActive && Input.GetKeyDown(KeyCode.Space))
             NextLine();
@@ -70,18 +74,27 @@ public class DialogueManager : MonoBehaviour
         lines.Clear();
         pendingEvents.Clear();
 
+        if (npcConversationIndices.TryGetValue(npc.name, out int savedIndex))
+            npc.SetConversationIndex(savedIndex);
+
         var conversation = npc.GetCurrentConversation();
+
+        if (conversation == null)
+        {
+            Debug.LogWarning("[DIALOGUE] NPC no tiene conversación asignada");
+            EndDialogue();
+            return;
+        }
+
+        readConversations.Add(conversation.name);
 
         foreach (var line in conversation.conversationLines)
             lines.Enqueue(line);
 
-        if (npc != null)
-        {
-            if (npc.panelNombre != null)
-                npc.panelNombre.SetActive(true);
-            if (npc.panelDialogo != null)
-                npc.panelDialogo.SetActive(true);
-        }
+        if (npc.panelNombre != null)
+            npc.panelNombre.SetActive(true);
+        if (npc.panelDialogo != null)
+            npc.panelDialogo.SetActive(true);
 
         dialogueActive = true;
 
@@ -112,7 +125,7 @@ public class DialogueManager : MonoBehaviour
         currentNpc = null;
     }
 
-    void NextLine()
+    private void NextLine()
     {
         if (lines.Count == 0)
         {
@@ -127,10 +140,11 @@ public class DialogueManager : MonoBehaviour
 
                 currentNpc.AdvanceConversation();
 
+                npcConversationIndices[currentNpc.name] = currentNpc.GetConversationIndex();
+
                 foreach (var evt in pendingEvents)
-                {
                     ExecuteEvent(evt);
-                }
+
                 pendingEvents.Clear();
             }
 
@@ -154,30 +168,34 @@ public class DialogueManager : MonoBehaviour
         if (currentLine.eventType != DialogueEventType.None)
         {
             if (currentLine.eventType == DialogueEventType.DestroyParent)
-            {
-                // Guardamos el evento para ejecutarlo al pasar la línea
                 pendingEvents.Add(currentLine);
-            }
             else
-            {
                 ExecuteEvent(currentLine);
-            }
         }
     }
 
-    void ExecuteEvent(Line l)
+    private void ExecuteEvent(Line l)
     {
         switch (l.eventType)
         {
             case DialogueEventType.GiveItems:
+                if (!string.IsNullOrEmpty(l.optionalParameter) && RewardManager.Instance != null)
+                {
+                    if (RewardManager.Instance.IsRewardGranted(l.optionalParameter))
+                        return;
+                }
+
                 if (l.itemsToGive != null)
                 {
                     foreach (var reward in l.itemsToGive)
-                    {
                         InventoryManager.Instance.AddItem(reward.item, reward.amount);
-                        InventoryUIManager.Instance?.RefreshAll();
-                    }
+
+                    InventoryUIManager.Instance?.RefreshAll();
                 }
+
+                if (!string.IsNullOrEmpty(l.optionalParameter) && RewardManager.Instance != null)
+                    RewardManager.Instance.MarkRewardGranted(l.optionalParameter);
+
                 break;
 
             case DialogueEventType.ChangeScene:
@@ -193,7 +211,11 @@ public class DialogueManager : MonoBehaviour
 
             case DialogueEventType.DestroyParent:
                 if (currentNpc != null)
+                {
+                    string objName = currentNpc.gameObject.name;
+                    destroyedObjects.Add(objName);
                     Destroy(currentNpc.gameObject);
+                }
                 break;
         }
     }
