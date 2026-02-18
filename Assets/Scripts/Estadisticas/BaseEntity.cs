@@ -32,6 +32,15 @@ public class BaseEntity : MonoBehaviour, ITargetable
         sr = GetComponentInChildren<SpriteRenderer>();
     }
 
+    public void ModifyStat(StatsEnum stat, float amount)
+    {
+        if (!stats.ContainsKey(stat))
+            stats[stat] = 0f;
+
+        stats[stat] += amount;
+    }
+
+
     public void OnHoverEnter()
     {
         sr.color = Color.red;

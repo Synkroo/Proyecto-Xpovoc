@@ -6,6 +6,7 @@ public enum DialogueEventType
     None,
     ChangeScene,
     GiveItems,
+    DestroyParent,
 }
 
 [System.Serializable]

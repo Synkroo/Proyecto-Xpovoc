@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     private bool dialogueActive;
     public bool IsDialogueActive => dialogueActive;
     private Line currentLine;
+    private List<Line> pendingEvents = new List<Line>();
 
     public PlayerController playerController;
 
@@ -39,33 +40,25 @@ public class DialogueManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (playerController == null)
-        {
             playerController = FindFirstObjectByType<PlayerController>();
-        }
     }
 
     private void Start()
     {
         if (playerController == null)
-        {
             playerController = FindFirstObjectByType<PlayerController>();
-        }
     }
 
     void Update()
     {
         if (dialogueActive && Input.GetKeyDown(KeyCode.Space))
-        {
             NextLine();
-        }
     }
 
     public void StartDialogue(InitDialogueDistance npc)
     {
         if (playerController == null)
-        {
             playerController = FindFirstObjectByType<PlayerController>();
-        }
 
         if (playerController != null)
         {
@@ -75,25 +68,12 @@ public class DialogueManager : MonoBehaviour
 
         currentNpc = npc;
         lines.Clear();
+        pendingEvents.Clear();
 
         var conversation = npc.GetCurrentConversation();
 
         foreach (var line in conversation.conversationLines)
-        {
-            if (line.eventType == DialogueEventType.GiveItems)
-            {
-                var rewardId = line.optionalParameter;
-                if (!string.IsNullOrEmpty(rewardId) && RewardManager.Instance != null)
-                {
-                    if (RewardManager.Instance.IsRewardGranted(rewardId))
-                    {
-                        continue;
-                    }
-                }
-            }
-
             lines.Enqueue(line);
-        }
 
         if (npc != null)
         {
@@ -126,6 +106,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueActive = false;
         lines.Clear();
+        pendingEvents.Clear();
         if (playerController != null)
             playerController.canMove = true;
         currentNpc = null;
@@ -145,6 +126,12 @@ public class DialogueManager : MonoBehaviour
                     currentNpc.panelDialogo.SetActive(false);
 
                 currentNpc.AdvanceConversation();
+
+                foreach (var evt in pendingEvents)
+                {
+                    ExecuteEvent(evt);
+                }
+                pendingEvents.Clear();
             }
 
             if (playerController != null)
@@ -165,36 +152,31 @@ public class DialogueManager : MonoBehaviour
         }
 
         if (currentLine.eventType != DialogueEventType.None)
-            HandleDialogueEvent(currentLine);
+        {
+            if (currentLine.eventType == DialogueEventType.DestroyParent)
+            {
+                // Guardamos el evento para ejecutarlo al pasar la línea
+                pendingEvents.Add(currentLine);
+            }
+            else
+            {
+                ExecuteEvent(currentLine);
+            }
+        }
     }
 
-    void HandleDialogueEvent(Line l)
+    void ExecuteEvent(Line l)
     {
         switch (l.eventType)
         {
             case DialogueEventType.GiveItems:
-                var rewardId = l.optionalParameter;
-
-                if (!string.IsNullOrEmpty(rewardId) && RewardManager.Instance != null)
-                {
-                    if (RewardManager.Instance.IsRewardGranted(rewardId))
-                        return;
-                }
-
                 if (l.itemsToGive != null)
                 {
                     foreach (var reward in l.itemsToGive)
                     {
                         InventoryManager.Instance.AddItem(reward.item, reward.amount);
-                        Debug.Log($"[DIALOGUE] Añadido {reward.item.name} x{reward.amount}");
-
                         InventoryUIManager.Instance?.RefreshAll();
                     }
-                }
-
-                if (!string.IsNullOrEmpty(rewardId) && RewardManager.Instance != null)
-                {
-                    RewardManager.Instance.MarkRewardGranted(rewardId);
                 }
                 break;
 
@@ -202,15 +184,17 @@ public class DialogueManager : MonoBehaviour
                 string sceneName = l.optionalParameter;
                 if (!string.IsNullOrEmpty(sceneName))
                 {
-                    Debug.Log("[DIALOGUE] Cambiando a la escena: " + sceneName);
-
                     if (sceneName == "Combate" && InventoryUIManager.Instance != null)
                         InventoryUIManager.Instance.isCombatInventory = true;
 
                     SceneManager.LoadScene(sceneName);
                 }
                 break;
+
+            case DialogueEventType.DestroyParent:
+                if (currentNpc != null)
+                    Destroy(currentNpc.gameObject);
+                break;
         }
     }
-
 }

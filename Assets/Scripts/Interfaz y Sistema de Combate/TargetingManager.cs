@@ -4,10 +4,19 @@ using UnityEngine;
 public class TargetingManager : MonoBehaviour
 {
     public static TargetingManager Instance;
+
+    public enum TargetType
+    {
+        Enemy,
+        Ally,
+        Any
+    }
+
     public bool isTargeting;
     public ITargetable currentHover;
 
     private Action<ITargetable> onTargetSelected;
+    private TargetType currentTargetType;
 
     void Awake()
     {
@@ -16,10 +25,8 @@ public class TargetingManager : MonoBehaviour
 
     void Update()
     {
-        if (!isTargeting)
-        {
-            return;
-        }
+        if (!isTargeting) return;
+
         HandleHover();
         HandleClick();
     }
@@ -33,7 +40,7 @@ public class TargetingManager : MonoBehaviour
         {
             BaseEntity entity = hit.collider.GetComponentInParent<BaseEntity>();
 
-            if (entity != null && entity.isEnemy)
+            if (entity != null && IsValidTarget(entity))
             {
                 nextHover = entity;
             }
@@ -47,6 +54,16 @@ public class TargetingManager : MonoBehaviour
         }
     }
 
+    bool IsValidTarget(BaseEntity entity)
+    {
+        return currentTargetType switch
+        {
+            TargetType.Enemy => entity.isEnemy,
+            TargetType.Ally => !entity.isEnemy,
+            TargetType.Any => true,
+            _ => false
+        };
+    }
 
     void HandleClick()
     {
@@ -63,9 +80,10 @@ public class TargetingManager : MonoBehaviour
         StopTargeting();
     }
 
-    public void StartTargeting(Action<ITargetable> onTargetSelected)
+    public void StartTargeting(TargetType targetType, Action<ITargetable> onTargetSelected)
     {
         this.onTargetSelected = onTargetSelected;
+        this.currentTargetType = targetType;
         isTargeting = true;
     }
 
@@ -76,5 +94,4 @@ public class TargetingManager : MonoBehaviour
         isTargeting = false;
         onTargetSelected = null;
     }
-
 }

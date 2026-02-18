@@ -10,7 +10,7 @@ public class EntityInitializer : MonoBehaviour
     public bool isEnemy;
 
     [Header("Stats iniciales")]
-    public StatValue[] stats; // Aquí sí funciona si StatValue está declarado correctamente
+    public StatValue[] stats;
 
     void Awake()
     {
@@ -21,7 +21,6 @@ public class EntityInitializer : MonoBehaviour
             entity.stats[s.stat] = s.value;
         }
 
-        // Copiar tipo de entidad
         entity.isAlly = isAlly;
         entity.isEnemy = isEnemy;
         entity.isHelper = isHelper;

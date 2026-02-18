@@ -132,8 +132,28 @@ public class InventoryUIManager : MonoBehaviour
     private void OnItemClicked(Item item)
     {
         selectedItem = item;
-        TargetingManager.Instance.StartTargeting(OnTargetSelected);
+
+        if (isCombatInventory)
+        {
+            UseItemAction action = new UseItemAction(selectedItem);
+            TurnManager.Instance.ExecuteAction(action);
+
+            RefreshAll();
+
+            if (combatInventoryPanel != null)
+                combatInventoryPanel.SetActive(false);
+        }
+        else
+        {
+            TargetingManager.Instance.StartTargeting(
+                TargetingManager.TargetType.Ally,
+                OnTargetSelected
+            );
+        }
     }
+
+
+
 
     private void OnTargetSelected(ITargetable targetable)
     {
@@ -150,6 +170,8 @@ public class InventoryUIManager : MonoBehaviour
         {
             selectedItem = null;
 
+            RefreshAll();
+
             if (isCombatInventory)
             {
                 if (combatInventoryPanel != null) combatInventoryPanel.SetActive(false);
@@ -159,10 +181,9 @@ public class InventoryUIManager : MonoBehaviour
             {
                 if (normalInventoryPanel != null) normalInventoryPanel.SetActive(false);
             }
-
-            RefreshAll();
         }
 
         TargetingManager.Instance.StopTargeting();
     }
+
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75c9bb57d7090c40b2059daa48f903d, type: 3}
+  m_Name: pokeball
+  m_EditorClassIdentifier: 
+  conversationLines:
+  - speakerName: Elely
+    dialogueLine: 'Alv una pokeball o eso creo porque ni
+
+      textura tiene xd'
+    eventType: 2
+    optionalParameter: ID03
+    itemsToGive:
+    - item: {fileID: 11400000, guid: d88d70cf173bfbe4d859d5cde9a81595, type: 2}
+      amount: 3
+  - speakerName: Elely
+    dialogueLine: Has obtenido 3 potis de vida!
+    eventType: 3
+    optionalParameter: 
+    itemsToGive: []

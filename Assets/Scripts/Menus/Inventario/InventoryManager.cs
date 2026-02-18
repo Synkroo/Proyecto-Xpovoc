@@ -38,8 +38,7 @@ public class InventoryManager : MonoBehaviour
         if (!items.ContainsKey(item))
             return false;
 
-        if (!item.effect.CanApply(target))
-            return false;
+        item.effect.Apply(target);
 
         items[item]--;
 
@@ -48,4 +47,5 @@ public class InventoryManager : MonoBehaviour
 
         return true;
     }
+
 }
