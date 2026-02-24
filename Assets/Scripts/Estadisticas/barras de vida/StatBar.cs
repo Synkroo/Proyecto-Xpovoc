@@ -3,27 +3,29 @@ using UnityEngine;
 public class StatBar : MonoBehaviour
 {
     public Bar bar;
-    public BaseEntity entity;
+    public int characterIndex;
     public StatsEnum stat;
 
     void Update()
     {
-        if (entity != null && entity.HasStat(stat))
-        {
-            float current = entity.GetStat(stat);
-            float max = entity.GetStat(MaxStatFor(stat));
-            bar.SetBar(current, max);
-        }
-    }
+        var stats = StatsManager.Instance.characters[characterIndex];
 
-    private StatsEnum MaxStatFor(StatsEnum stat)
-    {
-        return stat switch
+        float current = 0f;
+        float max = 0f;
+
+        switch (stat)
         {
-            StatsEnum.Health => StatsEnum.MaxHealth,
-            StatsEnum.Mana => StatsEnum.MaxMana,
-            StatsEnum.Sync => StatsEnum.MaxSync,
-            _ => stat
-        };
+            case StatsEnum.Health:
+                current = stats.health;
+                max = stats.maxHealth;
+                break;
+            case StatsEnum.Mana:
+                current = stats.mana;
+                max = stats.maxMana;
+                break;
+        }
+
+        bar.SetBar(current, max);
+
     }
 }

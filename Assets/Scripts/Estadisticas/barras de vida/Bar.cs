@@ -22,17 +22,23 @@ public class Bar : MonoBehaviour
 
     public void SetBar(float current, float max)
     {
-        currentValue = Mathf.Clamp(current, 0, max);
+        currentValue = current;
         maxValue = max;
         UpdateBar();
     }
 
     private void UpdateBar()
     {
-        if (Front == null) return;
-        float percent = currentValue / maxValue;
+        if (Front == null)
+        {
+            Debug.LogWarning($"Bar Update falló: Front no asignado en {gameObject.name}");
+            return;
+        }
+
+        float percent = maxValue > 0 ? Mathf.Clamp01(currentValue / maxValue) : 0f;
         Vector2 size = Front.sizeDelta;
         size.x = originalWidth * percent;
         Front.sizeDelta = size;
     }
+
 }

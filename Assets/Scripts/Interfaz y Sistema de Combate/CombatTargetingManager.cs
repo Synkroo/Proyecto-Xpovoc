@@ -1,49 +1,37 @@
 using System;
 using UnityEngine;
 
-public class TargetingManager : MonoBehaviour
+public class CombatTargetingManager : MonoBehaviour
 {
-    public static TargetingManager Instance;
+    public static CombatTargetingManager Instance;
 
-    public enum TargetType
-    {
-        Enemy,
-        Ally,
-        Any
-    }
+    public enum TargetType { Enemy, Ally, Any }
 
     public bool isTargeting;
-    public ITargetable currentHover;
+    public BaseEntity currentHover;
 
-    private Action<ITargetable> onTargetSelected;
+    private Action<BaseEntity> onTargetSelected;
     private TargetType currentTargetType;
 
-    void Awake()
-    {
-        Instance = this;
-    }
+    void Awake() => Instance = this;
 
     void Update()
     {
         if (!isTargeting) return;
-
         HandleHover();
         HandleClick();
     }
 
     void HandleHover()
     {
-        ITargetable nextHover = null;
+        BaseEntity nextHover = null;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             BaseEntity entity = hit.collider.GetComponentInParent<BaseEntity>();
-
             if (entity != null && IsValidTarget(entity))
-            {
                 nextHover = entity;
-            }
         }
 
         if (nextHover != currentHover)
@@ -52,6 +40,16 @@ public class TargetingManager : MonoBehaviour
             currentHover = nextHover;
             currentHover?.OnHoverEnter();
         }
+    }
+
+    void HandleClick()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        if (currentHover != null)
+            onTargetSelected?.Invoke(currentHover);
+
+        StopTargeting();
     }
 
     bool IsValidTarget(BaseEntity entity)
@@ -65,22 +63,7 @@ public class TargetingManager : MonoBehaviour
         };
     }
 
-    void HandleClick()
-    {
-        if (!Input.GetMouseButtonDown(0))
-            return;
-
-        if (currentHover == null)
-        {
-            StopTargeting();
-            return;
-        }
-
-        onTargetSelected?.Invoke(currentHover);
-        StopTargeting();
-    }
-
-    public void StartTargeting(TargetType targetType, Action<ITargetable> onTargetSelected)
+    public void StartTargeting(TargetType targetType, Action<BaseEntity> onTargetSelected)
     {
         this.onTargetSelected = onTargetSelected;
         this.currentTargetType = targetType;

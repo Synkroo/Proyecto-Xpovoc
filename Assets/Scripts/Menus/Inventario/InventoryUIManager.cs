@@ -6,6 +6,8 @@ public class InventoryUIManager : MonoBehaviour
     public static InventoryUIManager Instance;
 
     private Item selectedItem;
+    public Item SelectedItemForTargeting => selectedItem;
+
     public bool isCombatInventory;
 
     [Header("Inventory Panels")]
@@ -42,9 +44,14 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (scene.name == "Combate")
         {
+            isCombatInventory = true;
             combatInventoryPanel = GameObject.Find("CombatInventoryPanel");
             if (combatInventoryPanel != null)
                 combatItemsParent = combatInventoryPanel.transform.Find("Scroll View/Viewport/Content");
+        }
+        else
+        {
+            isCombatInventory = false;
         }
     }
 
@@ -70,8 +77,6 @@ public class InventoryUIManager : MonoBehaviour
 
     public void OpenCombatInventory()
     {
-        isCombatInventory = true;
-
         if (combatInventoryPanel == null)
         {
             combatInventoryPanel = GameObject.Find("CombatInventoryPanel");
@@ -79,8 +84,7 @@ public class InventoryUIManager : MonoBehaviour
                 combatItemsParent = combatInventoryPanel.transform.Find("Scroll View/Viewport/Content");
         }
 
-        if (combatInventoryPanel == null)
-            return;
+        if (combatInventoryPanel == null) return;
 
         combatInventoryPanel.SetActive(true);
         RefreshCombat();
@@ -88,11 +92,14 @@ public class InventoryUIManager : MonoBehaviour
 
     public void RefreshAll()
     {
-        RefreshNormal();
-        RefreshCombat();
+        if (normalInventoryPanel != null && normalInventoryPanel.activeSelf)
+            RefreshNormal();
+
+        if (combatInventoryPanel != null && combatInventoryPanel.activeSelf)
+            RefreshCombat();
     }
 
-    void RefreshNormal()
+    private void RefreshNormal()
     {
         if (normalItemsParent == null || normalItemSlotPrefab == null) return;
 
@@ -110,10 +117,9 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
-    void RefreshCombat()
+    private void RefreshCombat()
     {
-        if (combatItemsParent == null || combatItemSlotPrefab == null)
-            return;
+        if (combatItemsParent == null || combatItemSlotPrefab == null) return;
 
         foreach (Transform child in combatItemsParent)
             Destroy(child.gameObject);
@@ -139,51 +145,32 @@ public class InventoryUIManager : MonoBehaviour
             TurnManager.Instance.ExecuteAction(action);
 
             RefreshAll();
-
             if (combatInventoryPanel != null)
                 combatInventoryPanel.SetActive(false);
         }
         else
         {
-            TargetingManager.Instance.StartTargeting(
-                TargetingManager.TargetType.Ally,
+            UITargetingManager.Instance.StartTargeting(
                 OnTargetSelected
             );
         }
     }
 
-
-
-
     private void OnTargetSelected(ITargetable targetable)
     {
-        BaseEntity target = targetable as BaseEntity;
-        if (target == null)
-        {
-            TargetingManager.Instance.StopTargeting();
-            return;
-        }
+        CharacterStats stats = StatsManager.Instance.characters
+            .Find(c => c.name == targetable.TargetName);
 
-        bool used = InventoryManager.Instance.UseItem(selectedItem, target);
-
-        if (used)
+        if (stats != null && selectedItem != null)
         {
+            selectedItem.effect.Apply(stats);
+
+            InventoryManager.Instance.UseItem(selectedItem, null);
             selectedItem = null;
 
             RefreshAll();
-
-            if (isCombatInventory)
-            {
-                if (combatInventoryPanel != null) combatInventoryPanel.SetActive(false);
-                TurnManager.Instance.NextTurn();
-            }
-            else
-            {
-                if (normalInventoryPanel != null) normalInventoryPanel.SetActive(false);
-            }
         }
 
-        TargetingManager.Instance.StopTargeting();
+        UITargetingManager.Instance.StopTargeting();
     }
-
 }

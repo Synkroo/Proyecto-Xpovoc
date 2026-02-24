@@ -9,8 +9,8 @@ public class BasicAttack : BattleAction
 
     public override bool Execute(BaseEntity attacker)
     {
-        TargetingManager.Instance.StartTargeting(
-            TargetingManager.TargetType.Enemy,
+        CombatTargetingManager.Instance.StartTargeting(
+            CombatTargetingManager.TargetType.Enemy,
             target =>
             {
                 BaseEntity enemy = target as BaseEntity;

@@ -9,7 +9,7 @@ public class UseItemAction : BattleAction
 
     public override bool Execute(BaseEntity user)
     {
-        TargetingManager.Instance.StartTargeting(TargetingManager.TargetType.Ally, target =>
+        CombatTargetingManager.Instance.StartTargeting(CombatTargetingManager.TargetType.Ally, target =>
         {
             BaseEntity ally = target as BaseEntity;
             if (ally == null) return;
@@ -21,7 +21,7 @@ public class UseItemAction : BattleAction
                 TurnManager.Instance.NextTurn();
             }
 
-            TargetingManager.Instance.StopTargeting();
+            CombatTargetingManager.Instance.StopTargeting();
         });
 
         return false;

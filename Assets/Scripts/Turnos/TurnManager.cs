@@ -9,10 +9,13 @@ public class TurnManager : MonoBehaviour
     public static TurnManager Instance;
 
     private Queue<BaseEntity> turnQueue = new Queue<BaseEntity>();
-
     private List<BaseEntity> allEntities;
 
     public BaseEntity current;
+
+    [Header("Configuración del Timeline")]
+    [Tooltip("Cantidad de turnos que se mostrarán en la UI")]
+    public int turnsViewed = 5;
 
     void Awake()
     {
@@ -98,6 +101,6 @@ public class TurnManager : MonoBehaviour
 
     void UpdateTimeline()
     {
-        UI_BattleManager.Instance.UpdateTimeline(turnQueue.Take(TurnConstants.TurnsViewed).ToList());
+        UI_BattleManager.Instance.UpdateTimeline(turnQueue.Take(turnsViewed).ToList());
     }
 }

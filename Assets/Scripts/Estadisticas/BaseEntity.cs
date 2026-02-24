@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEntity : MonoBehaviour, ITargetable
+public class BaseEntity : MonoBehaviour
 {
     public bool inCombat = true;
     public Sprite turnIcon;

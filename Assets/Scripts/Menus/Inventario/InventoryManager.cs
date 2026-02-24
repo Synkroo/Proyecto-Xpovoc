@@ -32,13 +32,14 @@ public class InventoryManager : MonoBehaviour
 
     public bool UseItem(Item item, BaseEntity target)
     {
-        if (item == null || target == null)
+        if (item == null)
             return false;
+
+        if (target != null)
+            item.effect.Apply(target);
 
         if (!items.ContainsKey(item))
             return false;
-
-        item.effect.Apply(target);
 
         items[item]--;
 
@@ -47,5 +48,7 @@ public class InventoryManager : MonoBehaviour
 
         return true;
     }
+
+
 
 }

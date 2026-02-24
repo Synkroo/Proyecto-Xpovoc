@@ -3,27 +3,26 @@ using UnityEngine;
 public class EntityInitializer : MonoBehaviour
 {
     public BaseEntity entity;
-
-    [Header("Tipo de entidad")]
-    public bool isAlly;
-    public bool isHelper;
-    public bool isEnemy;
-
-    [Header("Stats iniciales")]
-    public StatValue[] stats;
+    public int characterIndex;
+    public StatBar statBar;
 
     void Awake()
     {
         if (entity == null) entity = GetComponent<BaseEntity>();
+        var stats = StatsManager.Instance.characters[characterIndex];
 
-        foreach (var s in stats)
-        {
-            entity.stats[s.stat] = s.value;
-        }
+        // Stats actuales
+        entity.stats[StatsEnum.Health] = stats.health;
+        entity.stats[StatsEnum.Mana] = stats.mana;
+        entity.stats[StatsEnum.Speed] = stats.speed;
 
-        entity.isAlly = isAlly;
-        entity.isEnemy = isEnemy;
-        entity.isHelper = isHelper;
+        // Stats máximos
+        entity.stats[StatsEnum.MaxHealth] = stats.maxHealth;
+        entity.stats[StatsEnum.MaxMana] = stats.maxMana;
+
+        entity.entityName = stats.name;
+
+        if (statBar != null)
+            statBar.bar.SetBar(stats.health, stats.maxHealth);
     }
-
 }
