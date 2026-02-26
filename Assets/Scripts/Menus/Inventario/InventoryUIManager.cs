@@ -22,6 +22,9 @@ public class InventoryUIManager : MonoBehaviour
     public ItemSlot normalItemSlotPrefab;
     public ItemSlot combatItemSlotPrefab;
 
+    [Header("Main Menu References")]
+    public GameObject personajesPanel;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -59,9 +62,6 @@ public class InventoryUIManager : MonoBehaviour
     {
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
             return;
-
-        if (!isCombatInventory && Input.GetKeyDown(KeyCode.I))
-            ToggleNormalInventory();
     }
 
     public void ToggleNormalInventory()
@@ -69,10 +69,22 @@ public class InventoryUIManager : MonoBehaviour
         if (normalInventoryPanel == null) return;
 
         bool isActive = normalInventoryPanel.activeSelf;
-        normalInventoryPanel.SetActive(!isActive);
 
         if (!isActive)
+        {
+            if (MainMenuManager.Instance != null)
+
+                normalInventoryPanel.SetActive(true);
+
+            if (personajesPanel != null)
+                personajesPanel.SetActive(false);
+
             RefreshNormal();
+        }
+        else
+        {
+            CloseNormalInventory();
+        }
     }
 
     public void OpenCombatInventory()
@@ -172,5 +184,34 @@ public class InventoryUIManager : MonoBehaviour
         }
 
         UITargetingManager.Instance.StopTargeting();
+    }
+    public bool IsNormalInventoryOpen()
+    {
+        return normalInventoryPanel != null && normalInventoryPanel.activeSelf;
+    }
+
+    public void CloseNormalInventory()
+    {
+        if (normalInventoryPanel != null)
+            normalInventoryPanel.SetActive(false);
+
+        if (personajesPanel != null)
+            personajesPanel.SetActive(true);
+    }
+
+    public void OpenInventory()
+    {
+        UIStateManager.Instance.ChangeState(UIStateManager.UIState.Inventory);
+    }
+
+    public void OpenInventory_Internal()
+    {
+        ToggleNormalInventory();
+    }
+
+    public void CloseInventory_Internal()
+    {
+        if (IsNormalInventoryOpen())
+            CloseNormalInventory();
     }
 }

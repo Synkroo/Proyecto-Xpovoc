@@ -3013,7 +3013,6 @@ MonoBehaviour:
   menusQueCierran:
   - {fileID: 826189046}
   - {fileID: 572561598}
-  - {fileID: 0}
 --- !u!1 &463727207
 GameObject:
   m_ObjectHideFlags: 0
@@ -14303,9 +14302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuQueAbre: {fileID: 826189046}
   menusQueCierran:
-  - {fileID: 0}
-  - {fileID: 1962216788}
   - {fileID: 572561598}
+  - {fileID: 1962216788}
 --- !u!1 &1874809531
 GameObject:
   m_ObjectHideFlags: 0
