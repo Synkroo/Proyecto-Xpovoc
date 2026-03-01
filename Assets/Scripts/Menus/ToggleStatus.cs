@@ -4,8 +4,6 @@ public class ToggleStatus : MonoBehaviour
 {
     public static ToggleStatus Instance;
 
-
-
     public GameObject StatusUI;
     public GameObject objectToHideWhileOpen;
 
@@ -27,6 +25,8 @@ public class ToggleStatus : MonoBehaviour
 
         if (objectToHideWhileOpen != null)
             objectToHideWhileOpen.SetActive(false);
+
+        UITargetingManager.Instance?.StartTargetingForStatus();
     }
 
     public void CloseStatus_Internal()
@@ -37,5 +37,7 @@ public class ToggleStatus : MonoBehaviour
 
         if (objectToHideWhileOpen != null)
             objectToHideWhileOpen.SetActive(true);
+
+        UITargetingManager.Instance?.StopTargeting();
     }
 }

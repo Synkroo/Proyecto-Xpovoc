@@ -982,11 +982,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 192797535}
   - {fileID: 672310650}
   - {fileID: 1858958259}
   - {fileID: 919198514}
   - {fileID: 555682146}
-  - {fileID: 192797535}
   m_Father: {fileID: 278772123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4470,8 +4470,9 @@ GameObject:
   - component: {fileID: 192797535}
   - component: {fileID: 192797537}
   - component: {fileID: 192797536}
+  - component: {fileID: 192797538}
   m_Layer: 5
-  m_Name: Elely (2)
+  m_Name: Elely
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4537,6 +4538,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192797534}
   m_CullTransparentMesh: 1
+--- !u!114 &192797538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192797534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 192797536}
+  characterName: Elely
 --- !u!1 &192864789
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,8 +6839,9 @@ GameObject:
   - component: {fileID: 292536174}
   - component: {fileID: 292536176}
   - component: {fileID: 292536175}
+  - component: {fileID: 292536177}
   m_Layer: 5
-  m_Name: Kaskarina (1)
+  m_Name: Kaskarina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6891,6 +6907,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292536173}
   m_CullTransparentMesh: 1
+--- !u!114 &292536177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292536173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 292536175}
+  characterName: Kaskarina
 --- !u!1 &297134199
 GameObject:
   m_ObjectHideFlags: 0
@@ -9338,12 +9368,12 @@ GameObject:
   - component: {fileID: 353887033}
   - component: {fileID: 353887032}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: Panel desactrivado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &353887031
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9386,7 +9416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11528,8 +11558,9 @@ GameObject:
   - component: {fileID: 416653483}
   - component: {fileID: 416653485}
   - component: {fileID: 416653484}
+  - component: {fileID: 416653486}
   m_Layer: 5
-  m_Name: Kaskarina (1)
+  m_Name: Kaskarina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11595,6 +11626,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416653482}
   m_CullTransparentMesh: 1
+--- !u!114 &416653486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416653482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 416653484}
+  characterName: Kaskarina
 --- !u!1 &417892967
 GameObject:
   m_ObjectHideFlags: 0
@@ -11897,7 +11942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &429942783
 Transform:
   m_ObjectHideFlags: 0
@@ -17176,8 +17221,9 @@ GameObject:
   - component: {fileID: 582873488}
   - component: {fileID: 582873490}
   - component: {fileID: 582873489}
+  - component: {fileID: 582873491}
   m_Layer: 5
-  m_Name: Nora (1)
+  m_Name: Nora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17243,6 +17289,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582873487}
   m_CullTransparentMesh: 1
+--- !u!114 &582873491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582873487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 582873489}
+  characterName: Nora
 --- !u!1 &588252419
 GameObject:
   m_ObjectHideFlags: 0
@@ -19587,8 +19647,9 @@ GameObject:
   - component: {fileID: 672310650}
   - component: {fileID: 672310652}
   - component: {fileID: 672310651}
+  - component: {fileID: 672310653}
   m_Layer: 5
-  m_Name: Nora (1)
+  m_Name: Nora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19654,6 +19715,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672310649}
   m_CullTransparentMesh: 1
+--- !u!114 &672310653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672310649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 672310651}
+  characterName: Nora
 --- !u!1 &672953077
 GameObject:
   m_ObjectHideFlags: 0
@@ -31682,11 +31757,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2090831990}
   - {fileID: 1549707026}
   - {fileID: 292536174}
   - {fileID: 630434676}
   - {fileID: 447095322}
-  - {fileID: 2090831990}
   m_Father: {fileID: 1467873713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -33361,7 +33436,7 @@ MonoBehaviour:
   - {fileID: 1868406614}
   - {fileID: 2048036103}
   - {fileID: 1400046276}
-  mainMenuPanel: {fileID: 429942782}
+  mainMenuPanel: {fileID: 353887030}
 --- !u!114 &1092587080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38924,7 +38999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.3529412, g: 0.3529412, b: 0.3529412, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -38959,6 +39034,7 @@ GameObject:
   - component: {fileID: 1287361862}
   - component: {fileID: 1287361864}
   - component: {fileID: 1287361863}
+  - component: {fileID: 1287361865}
   m_Layer: 5
   m_Name: Elely
   m_TagString: Untagged
@@ -39026,6 +39102,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287361861}
   m_CullTransparentMesh: 1
+--- !u!114 &1287361865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287361861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1287361863}
+  characterName: Elely
 --- !u!1 &1287883446
 GameObject:
   m_ObjectHideFlags: 0
@@ -42144,6 +42234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400046277}
+  - component: {fileID: 1400046278}
   m_Layer: 0
   m_Name: StatusUI
   m_TagString: Untagged
@@ -42170,6 +42261,26 @@ Transform:
   - {fileID: 912438711}
   m_Father: {fileID: 1485546553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400046278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400046276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bd8dbc060f11643a7e17f9e8da8cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultPanel: {fileID: 2024934280}
+  panels:
+  - characterName: Nora
+    panel: {fileID: 1855613184}
+  - characterName: Cleophee
+    panel: {fileID: 1789730839}
+  - characterName: Kaskarina
+    panel: {fileID: 912438710}
 --- !u!1 &1402375844
 GameObject:
   m_ObjectHideFlags: 0
@@ -44294,7 +44405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -45020,7 +45131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -46755,8 +46866,9 @@ GameObject:
   - component: {fileID: 1549707026}
   - component: {fileID: 1549707028}
   - component: {fileID: 1549707027}
+  - component: {fileID: 1549707029}
   m_Layer: 5
-  m_Name: Nora (1)
+  m_Name: Nora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46822,6 +46934,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549707025}
   m_CullTransparentMesh: 1
+--- !u!114 &1549707029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549707025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1549707027}
+  characterName: Nora
 --- !u!1 &1553339852
 GameObject:
   m_ObjectHideFlags: 0
@@ -47753,7 +47879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.3647059, g: 0.3647059, b: 0.3647059, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -48995,7 +49121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -54542,8 +54668,9 @@ GameObject:
   - component: {fileID: 1779517442}
   - component: {fileID: 1779517444}
   - component: {fileID: 1779517443}
+  - component: {fileID: 1779517445}
   m_Layer: 5
-  m_Name: Cleophee (1)
+  m_Name: Cleophee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54609,6 +54736,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779517441}
   m_CullTransparentMesh: 1
+--- !u!114 &1779517445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779517441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1779517443}
+  characterName: Cleophee
 --- !u!1 &1782131875
 GameObject:
   m_ObjectHideFlags: 0
@@ -56708,6 +56849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTargeting: 0
+  currentHover: {fileID: 0}
 --- !u!1 &1850449981
 GameObject:
   m_ObjectHideFlags: 0
@@ -56827,8 +56969,9 @@ GameObject:
   - component: {fileID: 1851056010}
   - component: {fileID: 1851056012}
   - component: {fileID: 1851056011}
+  - component: {fileID: 1851056013}
   m_Layer: 5
-  m_Name: Kaskarina (1)
+  m_Name: Kaskarina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56894,6 +57037,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851056009}
   m_CullTransparentMesh: 1
+--- !u!114 &1851056013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851056009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1851056011}
+  characterName: Kaskarina
 --- !u!1 &1854018836
 GameObject:
   m_ObjectHideFlags: 0
@@ -57151,8 +57308,9 @@ GameObject:
   - component: {fileID: 1858958259}
   - component: {fileID: 1858958261}
   - component: {fileID: 1858958260}
+  - component: {fileID: 1858958262}
   m_Layer: 5
-  m_Name: Cleophee (1)
+  m_Name: Cleophee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57218,6 +57376,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858958258}
   m_CullTransparentMesh: 1
+--- !u!114 &1858958262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858958258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1858958260}
+  characterName: Cleophee
 --- !u!1 &1859331818
 GameObject:
   m_ObjectHideFlags: 0
@@ -61080,8 +61252,9 @@ GameObject:
   - component: {fileID: 1985005991}
   - component: {fileID: 1985005993}
   - component: {fileID: 1985005992}
+  - component: {fileID: 1985005994}
   m_Layer: 5
-  m_Name: Cleophee (1)
+  m_Name: Cleophee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61147,6 +61320,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985005990}
   m_CullTransparentMesh: 1
+--- !u!114 &1985005994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985005990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1985005992}
+  characterName: Cleophee
 --- !u!1 &1993175820
 GameObject:
   m_ObjectHideFlags: 0
@@ -64448,8 +64635,9 @@ GameObject:
   - component: {fileID: 2090831990}
   - component: {fileID: 2090831992}
   - component: {fileID: 2090831991}
+  - component: {fileID: 2090831993}
   m_Layer: 5
-  m_Name: Elely (1)
+  m_Name: Elely
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64515,6 +64703,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090831989}
   m_CullTransparentMesh: 1
+--- !u!114 &2090831993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090831989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df394a26007b3b47ac120a060ac24ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 2090831991}
+  characterName: Elely
 --- !u!1 &2093668339
 GameObject:
   m_ObjectHideFlags: 0

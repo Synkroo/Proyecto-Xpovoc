@@ -1,20 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TargetableEntity : MonoBehaviour, ITargetable
+public class TargetableEntity : MonoBehaviour
 {
     public Image image;
     private Color originalColor;
 
     public string characterName;
 
-    void Awake()
+    private void Awake()
     {
         if (image != null)
             originalColor = image.color;
     }
-
-    public string TargetName => characterName;
 
     public void OnHoverEnter()
     {
@@ -30,20 +28,6 @@ public class TargetableEntity : MonoBehaviour, ITargetable
 
     public void OnSelected()
     {
-        CharacterStats stats = StatsManager.Instance.characters
-            .Find(c => c.name == TargetName);
-
-        if (stats == null)
-        {
-            return;
-        }
-
-        Item selectedItem = InventoryUIManager.Instance.SelectedItemForTargeting;
-        if (selectedItem != null)
-        {
-            selectedItem.effect.Apply(stats);
-        }
-
-        UITargetingManager.Instance.StopTargeting();
+        StatusUISwitcher.Instance?.Show(characterName);
     }
 }

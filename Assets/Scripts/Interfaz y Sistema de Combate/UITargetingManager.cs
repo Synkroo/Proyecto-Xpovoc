@@ -10,13 +10,16 @@ public class UITargetingManager : MonoBehaviour
     public static UITargetingManager Instance;
 
     public bool isTargeting;
-    public ITargetable currentHover;
+    public TargetableEntity currentHover;
 
-    private Action<ITargetable> onTargetSelected;
-    private List<ITargetable> validTargetsUI;
+    private Action<TargetableEntity> onTargetSelected;
+    private List<TargetableEntity> validTargetsUI;
 
     private GraphicRaycaster[] uiRaycasters;
     private EventSystem eventSystem;
+
+    // Excepción controlada (solo Status)
+    private bool keepTargetingAfterClick;
 
     private void Awake()
     {
@@ -58,23 +61,37 @@ public class UITargetingManager : MonoBehaviour
         HandleClick();
     }
 
-    public void StartTargeting(Action<ITargetable> onTargetSelected, List<ITargetable> uiTargets = null)
+    // MODO NORMAL (inventario, etc.) -> se para al click
+    public void StartTargeting(Action<TargetableEntity> onTargetSelected, List<TargetableEntity> uiTargets = null)
     {
+        SetupReferences();
+
         this.onTargetSelected = onTargetSelected;
         this.validTargetsUI = uiTargets;
+
+        keepTargetingAfterClick = false;
+        isTargeting = true;
+    }
+
+    // MODO STATUS (excepción) -> NO se para al click
+    public void StartTargetingForStatus(List<TargetableEntity> uiTargets = null)
+    {
+        SetupReferences();
+
+        onTargetSelected = null;
+        validTargetsUI = uiTargets;
+
+        keepTargetingAfterClick = true;
         isTargeting = true;
     }
 
     private void HandleHover()
     {
-        if (eventSystem == null || uiRaycasters == null)
-        {
-            return;
-        }
+        if (eventSystem == null || uiRaycasters == null) return;
 
-        ITargetable nextHover = null;
+        TargetableEntity nextHover = null;
 
-        PointerEventData pointerData = new PointerEventData(eventSystem)
+        var pointerData = new PointerEventData(eventSystem)
         {
             position = Input.mousePosition
         };
@@ -82,27 +99,20 @@ public class UITargetingManager : MonoBehaviour
         foreach (var raycaster in uiRaycasters)
         {
             if (raycaster == null || !raycaster.isActiveAndEnabled)
-            {
                 continue;
-            }
 
-            List<RaycastResult> results = new List<RaycastResult>();
+            var results = new List<RaycastResult>();
             raycaster.Raycast(pointerData, results);
-
 
             foreach (var result in results)
             {
-                var target = result.gameObject.GetComponent<ITargetable>();
-                if (target != null)
+                var target = result.gameObject.GetComponentInParent<TargetableEntity>();
+                if (target == null) continue;
+
+                if (validTargetsUI == null || validTargetsUI.Contains(target))
                 {
-                    if (validTargetsUI == null || validTargetsUI.Contains(target))
-                    {
-                        nextHover = target;
-                        break;
-                    }
-                }
-                else
-                {
+                    nextHover = target;
+                    break;
                 }
             }
 
@@ -124,18 +134,23 @@ public class UITargetingManager : MonoBehaviour
 
         if (currentHover != null)
         {
+            currentHover.OnSelected();
             onTargetSelected?.Invoke(currentHover);
         }
 
-        StopTargeting();
+        if (!keepTargetingAfterClick)
+            StopTargeting();
     }
 
     public void StopTargeting()
     {
         currentHover?.OnHoverExit();
         currentHover = null;
+
         isTargeting = false;
         onTargetSelected = null;
         validTargetsUI = null;
+
+        keepTargetingAfterClick = false;
     }
 }

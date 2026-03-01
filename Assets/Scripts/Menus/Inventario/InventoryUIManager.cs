@@ -168,22 +168,18 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
-    private void OnTargetSelected(ITargetable targetable)
+    private void OnTargetSelected(TargetableEntity targetable)
     {
         CharacterStats stats = StatsManager.Instance.characters
-            .Find(c => c.name == targetable.TargetName);
+            .Find(c => c.name == targetable.characterName);
 
         if (stats != null && selectedItem != null)
         {
             selectedItem.effect.Apply(stats);
-
             InventoryManager.Instance.UseItem(selectedItem, null);
             selectedItem = null;
-
             RefreshAll();
         }
-
-        UITargetingManager.Instance.StopTargeting();
     }
     public bool IsNormalInventoryOpen()
     {
